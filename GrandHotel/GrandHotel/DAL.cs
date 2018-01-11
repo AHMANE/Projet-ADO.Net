@@ -38,6 +38,11 @@ namespace GrandHotel
 
         }
 
+        internal void AjouterClient(Client clien, Adresse adre)
+        {
+            Clients.Add(clien);
+            Addresses.Add(adre);
+        }
     }
         
  }
