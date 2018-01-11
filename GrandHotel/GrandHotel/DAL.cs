@@ -50,7 +50,7 @@ namespace GrandHotel
             //    }
         }
 
-            return Client.AsNoTracking().ToList(); 
+            
         }
     }
 }
