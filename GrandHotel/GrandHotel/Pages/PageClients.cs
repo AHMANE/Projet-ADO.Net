@@ -87,7 +87,7 @@ namespace GrandHotel.Pages
                 ConsoleTable.From(ListeClients).Display("Liste des clients");
             }
 
-            // Affichage des Coordonnees
+            // Affichage des Coordonnees//
         private void CoordonnesClients()
             {
             int IdClient;
