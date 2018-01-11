@@ -54,7 +54,11 @@ namespace GrandHotel
 
         internal void SupprimerUnClient(int id)
         {
-            throw new NotImplementedException();
+            Client CL = Clients.Find(id);
+            if (CL != null)
+            {
+                Clients.Remove(CL);
+            }
         }
 
         public void AjouterClient(Client clien, Adresse adre)
