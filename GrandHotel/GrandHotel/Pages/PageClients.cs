@@ -26,8 +26,8 @@ namespace GrandHotel.Pages
 
         private void ExporterClients()
         {
-            IList<Client> listCol = GrandHotelApp.Instance.DAL.ObtenirClients();
-            GrandHotelApp.Instance.DAL.ExporterXml(IList < Client > listCol);
+            
+            GrandHotelApp.Instance.DAL.ExporterXml();
         }
 
         // Enregistrer les modifs
@@ -74,6 +74,7 @@ namespace GrandHotel.Pages
 
             // Ajout de numero de tel
             Output.WriteLine(ConsoleColor.Cyan, "Saisir le numero de tel");
+            tel.IdClient = Input.Read<int>("Id : ");
             tel.Numero = Input.Read<string>("Numéro : ");
             tel.CodeType = Input.Read<string>("Tapez M pour le numero mobile et F pour un numéro Fixe : ");
             tel.Pro = Input.Read<bool>("Professionnel Tapez true ou false");

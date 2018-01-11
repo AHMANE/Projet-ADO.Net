@@ -29,16 +29,27 @@ namespace GrandHotel
             
             // propriete de navigation
             [Display(ShortName = "None")]
+            [XmlIgnore]
+            [XmlArray("Adresses")]
+            [XmlArrayItem("Adresse")]
             public virtual List<Adresse> Adresses { get; set; }
             [Display(ShortName = "None")]
+            [XmlIgnore]
+            [XmlArray("Telephones")]
+            [XmlArrayItem("Telephone")]
             public virtual List<Telephone> Telephones { get; set; }
             [Display(ShortName = "None")]
+            [XmlIgnore]
+            [XmlArray("Emails")]
+            [XmlArrayItem("Email")]
             public virtual List<Email> Emails { get; set; }
             
 
         }
+        [Serializable]
         public class Telephone
         {
+            [XmlIgnore]
             [Key]
             [XmlAttribute]
             public string Numero {  get; set; }
@@ -67,7 +78,7 @@ namespace GrandHotel
             [XmlAttribute]
             public string Ville { get; set; }
             // propriete de navigation
-            public virtual List<Client> Client { get; set; }
+            public virtual Client Client { get; set; }
 
         }
         public class Email
