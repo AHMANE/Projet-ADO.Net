@@ -16,7 +16,7 @@ namespace GrandHotel.Pages
             Menu.AddOption("2", "Coordonnées clients", CoordonnesClients);
             Menu.AddOption("3", "Créer un nouveau Client ", CreationClient);
         }
-
+        // Créer un client
         private void CreationClient()
         {
             AfficherClients();
@@ -29,7 +29,7 @@ namespace GrandHotel.Pages
             clien.Civilite = Input.Read<string>("Civilité : ");
             clien.Nom = Input.Read<string>("Nom : ");
             clien.Prenom = Input.Read<string>("Prenom :");
-            clien.CarteFidelite = Input.Read<bool>("Carte de fidilié (oui ou non) :");
+            clien.CarteFidelite = Input.Read<bool>("Carte de fidilié (True ou False) :");
             clien.Societe = Input.Read<string>("Société");
 
             Output.WriteLine(ConsoleColor.Green, "Saisissez Votre adresse :");
