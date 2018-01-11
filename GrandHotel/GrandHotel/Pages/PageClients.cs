@@ -18,7 +18,36 @@ namespace GrandHotel.Pages
             Menu.AddOption("2", "Coordonnées clients", CoordonnesClients);
             Menu.AddOption("3", "Créer un nouveau Client ", CreationClient);
             Menu.AddOption("4", "Ajouter un numéro de téléphone ou une adresse mail ", AjouterNuméroTelAdresseMailClient);
-            Menu.AddOption("6", "Exportation de la liste de clients (format .XML)", ExporterClients);
+            Menu.AddOption("5", "Supprimer un client", SupprimerUnClient);
+            Menu.AddOption("7", "Enregistrer", Enregistrer);
+
+        }
+        // Enregistrer les modifs
+        private void Enregistrer()
+        {
+            try
+            {
+                GrandHotelApp.Instance.DAL.EnregistrerModifsClients();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception ra = dbEx;
+                foreach (var valid in dbEx.EntityValidationErrors)
+                {
+
+                }
+
+
+                throw ra;
+            };
+        }
+
+        // Suprimer un client 
+        private void SupprimerUnClient()
+        {
+            AfficherClients();
+            int Id = Input.Read<int>("Entrer ID du client à supprimer :");
+            GrandHotelApp.Instance.DAL.SupprimerUnClient(Id);
         }
 
         private void AjouterNuméroTelAdresseMailClient()
@@ -91,29 +120,21 @@ namespace GrandHotel.Pages
             // Affichage des Coordonnees//
         private void CoordonnesClients()
             {
-            int IdClient;
-            Client Coordonnees;
+           
+             
             AfficherClients();
-            IdClient = Input.Read<int>("Saisissez l'id du client dont vous souhaitez voir les coordonnees :");
-            Coordonnees = GrandHotelApp.Instance.DAL.ObtenirCoordonnees(IdClient);
-
-            //var CoordonneesClients = Coordonnees.Where(s => s.Id == IdClient).FirstOrDefault();
-            var CP = Coordonnees.Adresses.Select(c=> c.CodePostal);
-            var Rue = Coordonnees.Adresses.Select(r => r.Rue);
-            var Complement = Coordonnees.Adresses.Select(com => com.Complement);
-            var Tels = Coordonnees.Telephones.Select(t => t.Numero);
-            var Emails = Coordonnees.Emails.Select(em => em.Adresse);
-
-            ConsoleTable.From(CP).Display("Code Postal:");
-
-            //var Clients = GrandHotelApp.Instance.DAL.ObtenirClients();
+            int IdClient = Input.Read<int>("Saisissez l'id du client dont vous souhaitez voir les coordonnees :");
+            var CoordonneesClients = GrandHotelApp.Instance.DAL.ObtenirCoordonnees().Where(s => s.Id == IdClient).FirstOrDefault();
+            var tel = CoordonneesClients.Telephones;
+            var email = CoordonneesClients.Emails;
+            var adresse = CoordonneesClients.Adresses;
+            
+            ConsoleTable.From(tel, "tel").Display("tel");
+            ConsoleTable.From(email, "email").Display("email:");
+            
             //ConsoleTable.From(ListeClients).Display("Liste des clients");
         }
+      
 
-        private void ExporterClients()
-        {
-            IList<Client> listCol = GrandHotelApp.Instance.DAL.ObtenirClients();
-            GrandHotelApp.Instance.DAL.ExporterXml(listCol);
-        }
     }
 }
