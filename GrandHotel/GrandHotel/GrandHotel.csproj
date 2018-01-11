@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL.cs" />
+    <Compile Include="Entites.cs" />
     <Compile Include="GrandHotelApp.cs" />
     <Compile Include="Pages\PageAccueil.cs" />
     <Compile Include="Pages\PageClients.cs" />
