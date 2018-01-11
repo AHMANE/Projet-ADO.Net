@@ -36,9 +36,9 @@ namespace GrandHotel
             //            listClients.Add(client);
             //        }
             //    }
-            }
+        }
 
-            return listClients;
+            return Client.AsNoTracking().ToList(); 
         }
     }
 }

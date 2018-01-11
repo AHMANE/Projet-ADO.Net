@@ -21,8 +21,6 @@ namespace GrandHotel.Pages
            //   () => Northwind2App.Instance.NavigateTo(typeof(PagesProduits)));
            //
 
-
-
         }
     }      
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static GrandHotel.Entites;
 
 namespace GrandHotel.Pages
 {
@@ -14,9 +15,12 @@ namespace GrandHotel.Pages
             Menu.AddOption("1", "Liste des clients", AfficherClients);
         }
 
-        private void AfficherClients()
-        {
-            throw new NotImplementedException();
+            // Affichage des Clientss
+            private void AfficherClients()
+            {
+                IList<Client> ListeClients=DAL.ObtenirClients();
+                ConsoleTable.From(ListeClients).Display("Liste des clients");
         }
+        
     }
 }
