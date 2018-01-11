@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace GrandHotel
 {
-   public class Entites //
+   public class Entites 
     {
         
         public class Client
@@ -27,8 +27,8 @@ namespace GrandHotel
             public bool CarteFidelite { get; set; }
             [XmlAttribute]
             public string Societe { get; set; }
-            
-            // propriete de navigation
+
+            // Propriété de navigation
             [Display(ShortName = "None")]
             public virtual Adresse Adresses { get; set; }
             [Display(ShortName = "None")]
@@ -58,7 +58,8 @@ namespace GrandHotel
             public string CodeType { get; set; }
             [XmlIgnore]
             public bool Pro { get; set; }
-            // propriete de navigation
+            // Propriété de navigation
+            [Display(ShortName = "None")]
             public virtual Client Client { get; set; }
         }
          public class Adresse 
@@ -75,8 +76,12 @@ namespace GrandHotel
             public string CodePostal { get; set; }
             [XmlAttribute]
             public string Ville { get; set; }
-            // propriete de navigation
+            // Propriété de navigation
             public virtual Client Client { get; set; }
+            public override string ToString()
+            {
+                return IdClient + "   " + Rue + "   " + Complement + "   " + CodePostal + "   " + Ville;
+            }
 
         }
         public class Email
@@ -89,7 +94,7 @@ namespace GrandHotel
             public int IdClient { get; set; }
             [XmlIgnore]
             public bool Pro { get; set; }
-            // propriete de navigation
+            // // Propriété de navigation
             public virtual Client Client { get; set; }
         }
 
