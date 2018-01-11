@@ -38,7 +38,7 @@ namespace GrandHotel.Pages
             adre.Ville = Input.Read<string>("Ville : ");
 
 
-            GrandHotelApp.Instance.DAL.AjouterModifierProduit(clien, adre);
+            GrandHotelApp.Instance.DAL.AjouterClient(clien, adre);
            
 
             Output.WriteLine(ConsoleColor.Green, "produit créer avec succés");
