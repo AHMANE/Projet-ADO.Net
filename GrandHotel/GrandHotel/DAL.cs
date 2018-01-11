@@ -39,17 +39,21 @@ namespace GrandHotel
             SaveChanges();
         }
 
-        public Client ObtenirCoordonnees(int IdClient)
+        public IList<Client> ObtenirCoordonnees()
         {
             // List<Client> Coordonnees;
-            var Coordonnees = Clients.Where(s => s.Id == IdClient).FirstOrDefault();
+            //var Coordonnees = Clients.Where(s => s.Id == IdClient).FirstOrDefault();
             //var CP = CoordonneesClients.Adresses.CodePostal;
             //var Rue = CoordonneesClients.Adresses.Rue.ToString();
             //    .Include(a => a.Adresses)
             //    .Include(b => b.Telephones).ToList();
             ////.Include(c => c.Email)
             ////.Select(d => d.Rue).ToList();
-            return Coordonnees;
+            //IList<Client> Coordonnees;
+            //return Coordonnees;
+
+            return Clients.Include(a => a.Adresses).Include(b => b.Telephones).Include(c => c.Emails).ToList();
+            
         }
 
         internal void SupprimerUnClient(int id)
@@ -93,16 +97,17 @@ namespace GrandHotel
 
         // Création d'un fichier XML contenant la liste des clients.
 
-        public static void ExporterXml(IList<Client> listCol)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Client>),
-                                       new XmlRootAttribute("Clients"));
+        //public  void ExporterXml()
+        //{
+        //    List<Client> listCol = ObtenirClients();
+        //    XmlSerializer serializer = new XmlSerializer(typeof(List<Client>),
+        //                               new XmlRootAttribute("Clients"));
 
-            using (var sw = new StreamWriter(@"..\..\Clients_XMLSerializer.xml"))
-            {
-                serializer.Serialize(sw, listCol);
-            }
-        }
+        //    using (var sw = new StreamWriter(@"..\..\Clients_XMLSerializer.xml"))
+        //    {
+        //        serializer.Serialize(sw, listCol);
+        //    }
+        //}
     }
         
  }
