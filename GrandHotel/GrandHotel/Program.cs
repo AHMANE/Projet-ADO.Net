@@ -23,7 +23,8 @@ namespace GrandHotel
 
 
 
-            // Affichage de la page d'accueil 
+            // Affichage de la page d'accueil .
+        
             app.NavigateTo(accueil);
 
             // lancement de l'application
