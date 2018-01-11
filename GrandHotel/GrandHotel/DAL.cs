@@ -34,10 +34,10 @@ namespace GrandHotel
 
         }
 
-        public IList<Client> ObtenirCoordonnees()
+        public Client ObtenirCoordonnees(int IdClient)
         {
             // List<Client> Coordonnees;
-            var Coordonnees = Clients.Where(s => s.Id == idClient).FirstOrDefault();
+            var Coordonnees = Clients.Where(s => s.Id == IdClient).FirstOrDefault();
             //var CP = CoordonneesClients.Adresses.CodePostal;
             //var Rue = CoordonneesClients.Adresses.Rue.ToString();
             //    .Include(a => a.Adresses)
