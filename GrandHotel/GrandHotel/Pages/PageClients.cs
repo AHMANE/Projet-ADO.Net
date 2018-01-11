@@ -18,6 +18,7 @@ namespace GrandHotel.Pages
             Menu.AddOption("2", "Coordonnées clients", CoordonnesClients);
             Menu.AddOption("3", "Créer un nouveau Client ", CreationClient);
             Menu.AddOption("4", "Ajouter un numéro de téléphone ou une adresse mail ", AjouterNuméroTelAdresseMailClient);
+            Menu.AddOption("6", "Exportation de la liste de clients (format .XML)", ExporterClients);
         }
 
         private void AjouterNuméroTelAdresseMailClient()
@@ -91,22 +92,28 @@ namespace GrandHotel.Pages
         private void CoordonnesClients()
             {
             int IdClient;
-            IList<Client> Coordonnees;
+            Client Coordonnees;
             AfficherClients();
             IdClient = Input.Read<int>("Saisissez l'id du client dont vous souhaitez voir les coordonnees :");
             Coordonnees = GrandHotelApp.Instance.DAL.ObtenirCoordonnees(IdClient);
 
-            var CoordonneesClients = Coordonnees.Where(s => s.Id == IdClient).FirstOrDefault();
-            var CP = CoordonneesClients.Adresses.Select(c=> c.CodePostal);
-            var Rue = CoordonneesClients.Adresses.Select(r => r.Rue);
-            var Complement = CoordonneesClients.Adresses.Select(com => com.Complement);
-            var Tels = CoordonneesClients.Telephones.Select(t => t.Numero);
-            var Emails = CoordonneesClients.Emails.Select(em => em.Adresse);
+            //var CoordonneesClients = Coordonnees.Where(s => s.Id == IdClient).FirstOrDefault();
+            var CP = Coordonnees.Adresses.Select(c=> c.CodePostal);
+            var Rue = Coordonnees.Adresses.Select(r => r.Rue);
+            var Complement = Coordonnees.Adresses.Select(com => com.Complement);
+            var Tels = Coordonnees.Telephones.Select(t => t.Numero);
+            var Emails = Coordonnees.Emails.Select(em => em.Adresse);
 
             ConsoleTable.From(CP).Display("Code Postal:");
 
             //var Clients = GrandHotelApp.Instance.DAL.ObtenirClients();
             //ConsoleTable.From(ListeClients).Display("Liste des clients");
+        }
+
+        private void ExporterClients()
+        {
+            IList<Client> listCol = GrandHotelApp.Instance.DAL.ObtenirClients();
+            GrandHotelApp.Instance.DAL.ExporterXml(listCol);
         }
     }
 }

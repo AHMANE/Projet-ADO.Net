@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static GrandHotel.Entites;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace GrandHotel
 {
@@ -32,29 +34,23 @@ namespace GrandHotel
 
         }
 
-        public List<Client> ObtenirCoordonnees(int idClient)
+        public Client ObtenirCoordonnees(int idClient)
         {
             // List<Client> Coordonnees;
             var Coordonnees = Clients.Where(s => s.Id == idClient).FirstOrDefault();
-        //    //var CP = CoordonneesClients.Adresses.CodePostal;
-        //    //var Rue = CoordonneesClients.Adresses.Rue.ToString();
-
-
-
-
-        //    //var 
-
-        //    //    .Include(a => a.Adresses)
-        //    //    .Include(b => b.Telephones).ToList();
-        //    ////.Include(c => c.Email)
-        //    ////.Select(d => d.Rue).ToList();
-        return Coordonnees;
+            //var CP = CoordonneesClients.Adresses.CodePostal;
+            //var Rue = CoordonneesClients.Adresses.Rue.ToString();
+            //    .Include(a => a.Adresses)
+            //    .Include(b => b.Telephones).ToList();
+            ////.Include(c => c.Email)
+            ////.Select(d => d.Rue).ToList();
+            return Coordonnees;
         }
 
         public void AjouterClient(Client clien, Adresse adre)
         {
             Clients.Add(clien);
-            Addresses.Add(adre);
+            Adresses.Add(adre);
         }
 
         internal void AjouterNumeroMail(Client client, Telephone tel, Email eml)
@@ -78,6 +74,19 @@ namespace GrandHotel
                     email.Pro = eml.Pro;
                 }
                 
+            }
+        }
+
+        // Création d'un fichier XML contenant la liste des clients.
+
+        public static void ExporterXml(IList<Client> listCol)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Client>),
+                                       new XmlRootAttribute("Clients"));
+
+            using (var sw = new StreamWriter(@"..\..\Clients_XMLSerializer.xml"))
+            {
+                serializer.Serialize(sw, listCol);
             }
         }
     }
