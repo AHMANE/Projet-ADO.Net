@@ -10,7 +10,7 @@ namespace GrandHotel.Pages
 {
     public class PageClients : MenuPage
     {
-        private IList<Client> _client;
+       
 
         public PageClients() : base("Gestion des clients")
         {
