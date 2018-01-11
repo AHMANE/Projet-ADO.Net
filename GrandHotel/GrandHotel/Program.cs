@@ -10,7 +10,7 @@ namespace GrandHotel
     {
         static void Main(string[] args)
         {
-            // je suis dans 
+            // je suis dans le bus 
         }
     }
 }
