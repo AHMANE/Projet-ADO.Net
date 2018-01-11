@@ -34,6 +34,11 @@ namespace GrandHotel
 
         }
 
+        internal void EnregistrerModifsClients()
+        {
+            SaveChanges();
+        }
+
         public IList<Client> ObtenirCoordonnees()
         {
             // List<Client> Coordonnees;
@@ -45,6 +50,11 @@ namespace GrandHotel
             ////.Include(c => c.Email)
             ////.Select(d => d.Rue).ToList();
             return Coordonnees;
+        }
+
+        internal void SupprimerUnClient(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public void AjouterClient(Client clien, Adresse adre)
