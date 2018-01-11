@@ -10,6 +10,7 @@ namespace GrandHotel
     class GrandHotelApp : ConsoleApplication
     {
         private static GrandHotelApp _instance;
+        public DAL DAL { get; set; }
         //private static IDataContext _dataContext;
 
         /// <summary>
@@ -34,6 +35,7 @@ namespace GrandHotel
             // Définition des options de menu à ajouter dans tous les menus de pages
             MenuPage.DefaultOptions.Add(
                new Option("a", "Accueil", () => _instance.NavigateHome()));
+            DAL = new DAL();
         }
     }
 }

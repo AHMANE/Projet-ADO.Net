@@ -11,6 +11,7 @@ namespace GrandHotel
 {
     public class DAL : DbContext
     {
+        public DbSet<Client> Clients { get; set; }
         public DAL() : base("GrandHotel.Properties.Settings.HotelConnection")
         {
 
@@ -20,9 +21,13 @@ namespace GrandHotel
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public static IList<Client> ObtenirClients()
-        {
 
+
+        public  IList<Client> ObtenirClients()
+
+        {
+            Clients.OrderBy(c => c.Id).Load();
+            return Clients.Local.OrderBy(c => c.Id).ToList();
 
         }
 

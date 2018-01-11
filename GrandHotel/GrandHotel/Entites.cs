@@ -8,57 +8,74 @@ using System.Threading.Tasks;
 
 namespace GrandHotel
 {
-    class Entites
+   public class Entites
     {
         public class Client
         {
+            [Key]
             public int Id { get; set; }
-            [StringLength(4)]
+            
             public string Civilite { get; set; }
-            [StringLength(40)]
+            
             public string Nom { get; set; }
-            [StringLength(40)]
+           
             public string Prenom { get; set; }
             public bool CarteFidelite { get; set; }
-            [StringLength(100)]
+           
             public string Societe { get; set; }
-
-            public virtual Adresse Adresse { get; set; }
-            public virtual List<Telephone> Telephone { get; set; }
-            public virtual List<Email> Email { get; set; }
+            
+            // propriete de navigation
+            [Display(ShortName = "None")]
+            public virtual Adresse Adresses { get; set; }
+            [Display(ShortName = "None")]
+            public virtual List<Telephone> Telephones { get; set; }
+            [Display(ShortName = "None")]
+            public virtual List<Email> Emails { get; set; }
             
 
         }
         public class Telephone
         {
-            [MaxLength(12)]
+            [Key]
             public string Numero {  get; set; }
-            [ForeignKey("Client")]
+
+            
+           [ForeignKey("Client")]
             public int IdClient { get; set; }
-            [MaxLength(1)]
+            
             public string CodeType { get; set; }
             public bool Pro { get; set; }
+            // propriete de navigation
+            public virtual Client Client { get; set; }
         }
-         public class Adresse
+         public class Adresse 
         {
-            [MaxLength(5)]
-             public int IdClient { get; set; }
-            [StringLength(40)]
+            
+            [Key]
+            [ForeignKey("Client")]
+            public int IdClient { get; set; }
+          
             public string Rue { get; set; }
-            [StringLength(40)]
+            
             public string Complement { get; set; }
-            [MaxLength(5)]
+         
             public string CodePostal { get; set; }
-            [StringLength(40)]
+            
             public string Ville { get; set; }
+            // propriete de navigation
+            public virtual Client Client { get; set; }
+
         }
         public class Email
         {
-            [StringLength(40)]
+            [Key]
             public string Adresse { get; set; }
+            
             [ForeignKey("Client")]
             public int IdClient { get; set; }
             public bool Pro { get; set; }
+            // propriete de navigation
+            public virtual Client Client { get; set; }
         }
 
     }
