@@ -12,7 +12,7 @@ namespace GrandHotel
     public class DAL : DbContext
     {
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Adresse> Addresses { get; set; }
+        public DbSet<Adresse> Adresses { get; set; }
         public DbSet<Telephone> Telephones { get; set; }
         public DbSet<Email> Emails { get; set; }
 
@@ -32,14 +32,23 @@ namespace GrandHotel
 
         }
 
-        public IList<Client> ObtenirCoordonnees(int idClient)
+        public List<Client> ObtenirCoordonnees(int idClient)
         {
-            return Clients.Where(s => s.Id == idClient)
-                .Include(a => a.Adresses.Rue)
-                .Include(b => b.Adresses.Complement)
-                .Include(c => c.Adresses.CodePostal)
-                .Include(d => d.Adresses.Ville).ToList();
+            // List<Client> Coordonnees;
+            var Coordonnees = Clients.Where(s => s.Id == idClient).FirstOrDefault();
+        //    //var CP = CoordonneesClients.Adresses.CodePostal;
+        //    //var Rue = CoordonneesClients.Adresses.Rue.ToString();
 
+
+
+
+        //    //var 
+
+        //    //    .Include(a => a.Adresses)
+        //    //    .Include(b => b.Telephones).ToList();
+        //    ////.Include(c => c.Email)
+        //    ////.Select(d => d.Rue).ToList();
+        return Coordonnees;
         }
 
         internal void AjouterClient(Client clien, Adresse adre)

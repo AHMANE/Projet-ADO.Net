@@ -14,7 +14,7 @@ namespace GrandHotel.Pages
         {
             Menu.AddOption("1", "Liste des clients", AfficherClients);
             Menu.AddOption("2", "Coordonnées clients", CoordonnesClients);
-            Menu.AddOption("2", "Créer un nouveau Client ", CreationClient);
+            Menu.AddOption("3", "Créer un nouveau Client ", CreationClient);
         }
 
         private void CreationClient()
@@ -44,7 +44,7 @@ namespace GrandHotel.Pages
             Output.WriteLine(ConsoleColor.Green, "produit créer avec succés");
         }
 
-        // Affichage des Clientss
+        // Affichage des Clients
         private  void AfficherClients()
             {
                 IList<Client> ListeClients=GrandHotelApp.Instance.DAL.ObtenirClients();
@@ -52,19 +52,25 @@ namespace GrandHotel.Pages
             }
 
             // Affichage des Coordonnees
-            private void CoordonnesClients()
+        private void CoordonnesClients()
             {
             int IdClient;
             IList<Client> Coordonnees;
             AfficherClients();
             IdClient = Input.Read<int>("Saisissez l'id du client dont vous souhaitez voir les coordonnees :");
             Coordonnees = GrandHotelApp.Instance.DAL.ObtenirCoordonnees(IdClient);
-            ConsoleTable.From(Coordonnees).Display("Coordonnees clients");
+
+            var CoordonneesClients = Coordonnees.Where(s => s.Id == IdClient).FirstOrDefault();
+            var CP = CoordonneesClients.Adresses.Select(c=> c.CodePostal);
+            var Rue = CoordonneesClients.Adresses.Select(r => r.Rue);
+            var Complement = CoordonneesClients.Adresses.Select(com => com.Complement);
+            var Tels = CoordonneesClients.Telephones.Select(t => t.Numero);
+            var Emails = CoordonneesClients.Emails.Select(em => em.Adresse);
+
+            ConsoleTable.From(CP).Display("Code Postal:");
 
             //var Clients = GrandHotelApp.Instance.DAL.ObtenirClients();
             //ConsoleTable.From(ListeClients).Display("Liste des clients");
-
-
         }
     }
 }
