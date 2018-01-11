@@ -11,6 +11,12 @@ namespace GrandHotel.Pages
     {
         public PageClients() : base("Gestion des clients")
         {
+            Menu.AddOption("1", "Liste des clients", AfficherClients);
+        }
+
+        private void AfficherClients()
+        {
+            throw new NotImplementedException();
         }
     }
 }
