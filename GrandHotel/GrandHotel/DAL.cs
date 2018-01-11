@@ -25,26 +25,21 @@ namespace GrandHotel
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-
-
         public  IList<Client> ObtenirClients()
-
         {
             Clients.OrderBy(c => c.Id).Load();
             return Clients.Local.OrderBy(c => c.Id).ToList();
 
         }
 
-        internal void AjouterModifierProduit(Client clien, Adresse adre)
-        {
-            throw new NotImplementedException();
-        }
-    }
         internal IList<string> ObtenirCoordonnees(int idClient)
         {
-           return Clients.Where(s => s.Id == idClient).ToList();
+            return Clients.Where(s => s.Id == idClient).Include(a => a.Rue).Include(b => b.Complement).Include(c => c.CodePostal).Include(d => d.Ville);
 
         }
+
     }
-    }
+        
+ }
+    
 
