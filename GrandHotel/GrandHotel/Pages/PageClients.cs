@@ -18,7 +18,7 @@ namespace GrandHotel.Pages
             // Affichage des Clientss
             private void AfficherClients()
             {
-                IList<Client> ListeClients=DAL.ObtenirClients();
+                IList<Client> ListeClients=DAL.ObtenirClients);
                 ConsoleTable.From(ListeClients).Display("Liste des clients");
         }
         
