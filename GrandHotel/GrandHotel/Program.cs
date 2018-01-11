@@ -15,7 +15,7 @@ namespace GrandHotel
             GrandHotelApp app = GrandHotelApp.Instance;
             app.Title = "Bienvnue dans le Grand Hotel";
 
-            // Ajout de page
+            // Ajout des pages
             MenuPage accueil = new PageAccueil();
             app.AddPage(accueil);
             app.AddPage(new PageClients());
@@ -23,8 +23,10 @@ namespace GrandHotel
 
 
 
-            // Afficher 
+            // Affichage de la page d'accueil 
             app.NavigateTo(accueil);
+
+            // lancement de l'application
             app.Run();
         }
     }
