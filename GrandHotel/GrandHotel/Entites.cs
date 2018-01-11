@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace GrandHotel
 {
-   public class Entites
+   public class Entites //
     {
         public class Client
         {
