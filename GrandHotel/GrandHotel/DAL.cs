@@ -34,10 +34,15 @@ namespace GrandHotel
 
         }
 
-        public Client ObtenirCoordonnees(int IdClient)
+        internal void EnregistrerModifsClients()
+        {
+            SaveChanges();
+        }
+
+        public IList<Client> ObtenirCoordonnees()
         {
             // List<Client> Coordonnees;
-            var Coordonnees = Clients.Where(s => s.Id == IdClient).FirstOrDefault();
+            var Coordonnees = Clients.Where(s => s.Id == idClient).FirstOrDefault();
             //var CP = CoordonneesClients.Adresses.CodePostal;
             //var Rue = CoordonneesClients.Adresses.Rue.ToString();
             //    .Include(a => a.Adresses)
@@ -45,6 +50,11 @@ namespace GrandHotel
             ////.Include(c => c.Email)
             ////.Select(d => d.Rue).ToList();
             return Coordonnees;
+        }
+
+        internal void SupprimerUnClient(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public void AjouterClient(Client clien, Adresse adre)
