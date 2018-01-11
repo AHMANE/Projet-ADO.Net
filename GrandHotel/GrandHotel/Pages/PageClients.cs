@@ -107,10 +107,11 @@ namespace GrandHotel.Pages
             clien.CarteFidelite = Input.Read<bool>("Carte de fidilié (True ou False) :");
             clien.Societe = Input.Read<string>("Société");
 
-            Output.WriteLine(ConsoleColor.Green, "Saisissez Votre adresse :");
+            Output.WriteLine(ConsoleColor.Green, "Saisissez l'adresse du nouveau client:");
             adre.Rue = Input.Read<string>("Rue : ");
             adre.CodePostal = Input.Read<string>("Code Postale : ");
             adre.Ville = Input.Read<string>("Ville : ");
+            adre.IdClient = clien.Id;
 
 
             GrandHotelApp.Instance.DAL.AjouterClient(clien, adre);
