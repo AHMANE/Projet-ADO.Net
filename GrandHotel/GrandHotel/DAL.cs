@@ -12,6 +12,7 @@ namespace GrandHotel
     public class DAL : DbContext
     {
         public DbSet<Client> Clients { get; set; }
+        
         public DAL() : base("GrandHotel.Properties.Settings.HotelConnection")
         {
 
@@ -31,7 +32,10 @@ namespace GrandHotel
 
         }
 
-           
+        internal void AjouterModifierProduit(Client clien, Adresse adre)
+        {
+            throw new NotImplementedException();
         }
+    }
     }
 
