@@ -13,6 +13,7 @@ namespace GrandHotel.Pages
         public PageClients() : base("Gestion des clients")
         {
             Menu.AddOption("1", "Liste des clients", AfficherClients);
+            Menu.AddOption("2", "Coordonnées clients", CoordonnesClients);
         }
 
             // Affichage des Clientss
@@ -20,7 +21,16 @@ namespace GrandHotel.Pages
             {
                 IList<Client> ListeClients=GrandHotelApp.Instance.DAL.ObtenirClients();
                 ConsoleTable.From(ListeClients).Display("Liste des clients");
-        }
-        
+            }
+
+            // Affichage des Clientss
+            private void CoordonnesClients()
+            {
+            AfficherClients();
+            ConsoleTable.From(ListeClients).Display("Liste des clients");
+            var Coords = GrandHotelApp.Instance.DAL.ObtenirClients();
+            
+
+            }
     }
 }
