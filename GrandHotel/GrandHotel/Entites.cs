@@ -11,6 +11,7 @@ namespace GrandHotel
 {
    public class Entites //
     {
+        
         public class Client
         {
             [Key]

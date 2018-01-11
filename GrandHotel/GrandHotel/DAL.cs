@@ -103,7 +103,7 @@ namespace GrandHotel
        
             public  void ExporterXml()
             {
-            IList<Client> liste = ObtenirClients();
+           var liste = ObtenirClients();
 
             // On crée un sérialiseur, en spécifiant le type de l'objet à sérialiser
             // et le nom de l'élément xml racine
