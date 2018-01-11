@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 using static GrandHotel.Entites;
 using System.Xml.Serialization;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Soap;
 
 namespace GrandHotel
 {
     public class DAL : DbContext
     {
+        private const string FICHIER_XML = @"..\..\listeSalle.xml";
         public DbSet<Client> Clients { get; set; }
         public DbSet<Adresse> Adresses { get; set; }
         public DbSet<Telephone> Telephones { get; set; }
@@ -81,6 +83,7 @@ namespace GrandHotel
             {
                 if(telephone == null)
                 {
+                    telephone.IdClient = tel.IdClient;
                     telephone.Numero = tel.Numero;
                     telephone.CodeType = tel.CodeType;
                     telephone.Pro = tel.Pro;
@@ -97,17 +100,20 @@ namespace GrandHotel
 
         // Création d'un fichier XML contenant la liste des clients.
 
-        //public  void ExporterXml()
-        //{
-        //    List<Client> listCol = ObtenirClients();
-        //    XmlSerializer serializer = new XmlSerializer(typeof(List<Client>),
-        //                               new XmlRootAttribute("Clients"));
+       
+            public  void ExporterXml()
+            {
+            IList<Client> liste = ObtenirClients();
 
-        //    using (var sw = new StreamWriter(@"..\..\Clients_XMLSerializer.xml"))
-        //    {
-        //        serializer.Serialize(sw, listCol);
-        //    }
-        //}
+            // On crée un sérialiseur, en spécifiant le type de l'objet à sérialiser
+            // et le nom de l'élément xml racine
+            FileStream flux = File.Create(FICHIER_XML);
+            SoapFormatter serialiseur2 = new SoapFormatter();
+            serialiseur2.Serialize(flux, liste);
+            flux.Close();
+        }
+
+        
     }
         
  }
