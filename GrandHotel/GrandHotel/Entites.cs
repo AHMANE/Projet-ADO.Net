@@ -11,7 +11,7 @@ namespace GrandHotel
 {
    public class Entites 
     {
-        
+       
         public class Client
         {
             [Key]
@@ -44,7 +44,7 @@ namespace GrandHotel
             
 
         }
-        [Serializable]
+       
         public class Telephone
         {
             [XmlIgnore]
@@ -62,7 +62,8 @@ namespace GrandHotel
             [Display(ShortName = "None")]
             public virtual Client Client { get; set; }
         }
-         public class Adresse 
+        
+        public class Adresse 
         {
             
             [Key]
