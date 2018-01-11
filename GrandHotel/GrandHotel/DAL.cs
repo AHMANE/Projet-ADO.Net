@@ -35,6 +35,11 @@ namespace GrandHotel
 
         }
 
+        internal void AjouterModifierProduit(Client clien, Adresse adre)
+        {
+            throw new NotImplementedException();
+        }
+    }
         internal IList<string> ObtenirCoordonnees(int idClient)
         {
            return Clients.Where(s => s.Id == idClient).ToList();
