@@ -97,6 +97,10 @@ namespace GrandHotel
             public bool Pro { get; set; }
             // // Propriété de navigation
             public virtual Client Client { get; set; }
+            public override string ToString()
+            {
+                return IdClient + "   " + Adresse + "   " + Pro;
+            }
         }
 
     }

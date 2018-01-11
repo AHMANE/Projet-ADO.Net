@@ -16,7 +16,7 @@ namespace GrandHotel
     {
         private const string FICHIER_XML = @"..\..\listeSalle.xml";
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Adresse> Adresses { get; set; }
+        public DbSet<Adresse> Addresses { get; set; }
         public DbSet<Telephone> Telephones { get; set; }
         public DbSet<Email> Emails { get; set; }
 
@@ -36,7 +36,7 @@ namespace GrandHotel
 
         }
 
-        internal void EnregistrerModifsClients()
+        public void EnregistrerModifsClients()
         {
             SaveChanges();
         }
@@ -58,7 +58,7 @@ namespace GrandHotel
             
         }
 
-        internal void SupprimerUnClient(int id)
+        public void SupprimerUnClient(int id)
         {
             Client CL = Clients.Find(id);
             if (CL != null)
@@ -70,7 +70,7 @@ namespace GrandHotel
         public void AjouterClient(Client clien, Adresse adre)
         {
             Clients.Add(clien);
-            Adresses.Add(adre);
+            Addresses.Add(adre);
         }
 
         internal void AjouterNumeroMail(Client client, Telephone tel, Email eml)
