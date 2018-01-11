@@ -12,6 +12,10 @@ namespace GrandHotel
     public class DAL : DbContext
     {
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Adresse> Addresses { get; set; }
+        public DbSet<Telephone> Telephones { get; set; }
+        public DbSet<Email> Emails { get; set; }
+
         public DAL() : base("GrandHotel.Properties.Settings.HotelConnection")
         {
 
@@ -31,7 +35,11 @@ namespace GrandHotel
 
         }
 
-           
+        internal IList<string> ObtenirCoordonnees(int idClient)
+        {
+           return Clients.Where(s => s.Id == idClient).ToList();
+
         }
+    }
     }
 

@@ -23,14 +23,20 @@ namespace GrandHotel.Pages
                 ConsoleTable.From(ListeClients).Display("Liste des clients");
             }
 
-            // Affichage des Clientss
+            // Affichage des Coordonnees
             private void CoordonnesClients()
             {
+            int IdClient;
+            IList<string> Coordonnees;
             AfficherClients();
-            ConsoleTable.From(ListeClients).Display("Liste des clients");
-            var Coords = GrandHotelApp.Instance.DAL.ObtenirClients();
-            
+            IdClient = Input.Read<int>("Saisissez l'id du client dont vous souhaitez voir les coordonnees :");
+            Coordonnees = GrandHotelApp.Instance.DAL.ObtenirCoordonnees(IdClient);
+            ConsoleTable.From(Coordonnees).Display("Coordonnees clients");
 
-            }
+            //var Clients = GrandHotelApp.Instance.DAL.ObtenirClients();
+            //ConsoleTable.From(ListeClients).Display("Liste des clients");
+
+
+        }
     }
 }
