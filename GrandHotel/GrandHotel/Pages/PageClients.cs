@@ -55,7 +55,7 @@ namespace GrandHotel.Pages
             private void CoordonnesClients()
             {
             int IdClient;
-            IList<string> Coordonnees;
+            IList<Client> Coordonnees;
             AfficherClients();
             IdClient = Input.Read<int>("Saisissez l'id du client dont vous souhaitez voir les coordonnees :");
             Coordonnees = GrandHotelApp.Instance.DAL.ObtenirCoordonnees(IdClient);
