@@ -32,9 +32,13 @@ namespace GrandHotel
 
         }
 
-        internal IList<string> ObtenirCoordonnees(int idClient)
+        public IList<Client> ObtenirCoordonnees(int idClient)
         {
-            return Clients.Where(s => s.Id == idClient).Include(a => a.Rue).Include(b => b.Complement).Include(c => c.CodePostal).Include(d => d.Ville);
+            return Clients.Where(s => s.Id == idClient)
+                .Include(a => a.Adresses.Rue)
+                .Include(b => b.Adresses.Complement)
+                .Include(c => c.Adresses.CodePostal)
+                .Include(d => d.Adresses.Ville).ToList();
 
         }
 
