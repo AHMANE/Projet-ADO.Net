@@ -10,12 +10,48 @@ namespace GrandHotel.Pages
 {
     public class PageClients : MenuPage
     {
+        private IList<Client> _client;
+
         public PageClients() : base("Gestion des clients")
         {
             Menu.AddOption("1", "Liste des clients", AfficherClients);
             Menu.AddOption("2", "Coordonnées clients", CoordonnesClients);
             Menu.AddOption("3", "Créer un nouveau Client ", CreationClient);
+            Menu.AddOption("4", "Ajouter un numéro de téléphone ou une adresse mail ", AjouterNuméroTelAdresseMailClient);
         }
+
+        private void AjouterNuméroTelAdresseMailClient()
+        {
+            // Affiche la liste des clients 
+          AfficherClients();
+
+            // Récupère le cleint dont l'id a été saisi
+            int id = Input.Read<int>("Id du Client à Ajouter son numéro de tel ou/et son adresse mail :");
+
+
+            //Client client = _client.Where(x => x.Id == id).FirstOrDefault();
+            Client client = new Client();
+            Telephone tel = new Telephone();
+            Email email = new Email();
+
+            // Ajout de numero de tel
+            Output.WriteLine(ConsoleColor.Cyan, "Saisir le numero de tel");
+            tel.Numero = Input.Read<string>("Numéro : ");
+            tel.CodeType = Input.Read<string>("Tapez M pour le numero mobile et F pour un numéro Fixe : ");
+            tel.Pro = Input.Read<bool>("Professionnel Tapez true ou false");
+            // Ajout de l'adresse mail 
+            Output.WriteLine(ConsoleColor.Cyan, "Saisir adresse mail");
+            email.Adresse = Input.Read<string>("Adresse mail : ");
+            email.Pro = Input.Read<bool>("Professionnel Tapez true ou false");
+
+       ;
+
+            //Affiche Numero Client 
+            GrandHotelApp.Instance.DAL.AjouterNumeroMail(client, tel, email);
+            
+            Output.WriteLine(ConsoleColor.Green, "Numero et mail ajouter  avec succés");
+        }
+
         // Créer un client
         private void CreationClient()
         {

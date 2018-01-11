@@ -47,6 +47,30 @@ namespace GrandHotel
             Clients.Add(clien);
             Addresses.Add(adre);
         }
+
+        internal void AjouterNumeroMail(Client client, Telephone tel, Email eml)
+        {
+            Client clion = Clients.Find(client.Id);
+            Telephone telephone = Telephones.Find(tel.IdClient);
+            Email email = Emails.Find(eml.IdClient);
+
+            if(clion != null)
+            {
+                if(telephone == null)
+                {
+                    telephone.Numero = tel.Numero;
+                    telephone.CodeType = tel.CodeType;
+                    telephone.Pro = tel.Pro;
+                    
+                }
+                if (email == null)
+                {
+                    email.Adresse = eml.Adresse;
+                    email.Pro = eml.Pro;
+                }
+                
+            }
+        }
     }
         
  }
