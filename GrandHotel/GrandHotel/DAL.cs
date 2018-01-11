@@ -39,7 +39,7 @@ namespace GrandHotel
             SaveChanges();
         }
 
-        public IList<Client> ObtenirCoordonnees()
+        public Client ObtenirCoordonnees(int IdClient)
         {
             // List<Client> Coordonnees;
             var Coordonnees = Clients.Where(s => s.Id == IdClient).FirstOrDefault();

@@ -19,9 +19,17 @@ namespace GrandHotel.Pages
             Menu.AddOption("3", "Créer un nouveau Client ", CreationClient);
             Menu.AddOption("4", "Ajouter un numéro de téléphone ou une adresse mail ", AjouterNuméroTelAdresseMailClient);
             Menu.AddOption("5", "Supprimer un client", SupprimerUnClient);
+            Menu.AddOption("6", "Exporter la liste de clients sur un fichier XML", ExporterClients);
             Menu.AddOption("7", "Enregistrer", Enregistrer);
 
         }
+
+        private void ExporterClients()
+        {
+            IList<Client> listCol = GrandHotelApp.Instance.DAL.ObtenirClients();
+            GrandHotelApp.Instance.DAL.ExporterXml(IList < Client > listCol);
+        }
+
         // Enregistrer les modifs
         private void Enregistrer()
         {
