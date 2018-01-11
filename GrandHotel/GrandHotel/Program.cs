@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GrandHotel.Pages;
+using Outils.TConsole;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,20 @@ namespace GrandHotel
     {
         static void Main(string[] args)
         {
-            // je suis dans le bus 
+            GrandHotelApp app = GrandHotelApp.Instance;
+            app.Title = "Bienvnue dans le Grand Hotel";
+
+            // Ajout de page
+            MenuPage accueil = new PageAccueil();
+            app.AddPage(accueil);
+            app.AddPage(new PageClients());
+
+
+
+
+            // Afficher 
+            app.NavigateTo(accueil);
+            app.Run();
         }
     }
 }
