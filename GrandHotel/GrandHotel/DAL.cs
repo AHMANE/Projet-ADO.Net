@@ -32,36 +32,41 @@ namespace GrandHotel
 
         }
 
-        public List<Client> ObtenirCoordonnees(int idClient)
+        public IList<Client> ObtenirCoordonnees()
         {
-            // List<Client> Coordonnees;
-            var Coordonnees = Clients.Where(s => s.Id == idClient).FirstOrDefault();
-        //    //var CP = CoordonneesClients.Adresses.CodePostal;
-        //    //var Rue = CoordonneesClients.Adresses.Rue.ToString();
+            // Recuprer id de client avec la 
+          return Clients.Include(c => c.Telephones)
+                .Include(x => x.Emails)
+                .Include(w => w.Adresses).ToList();
+            
+        }
 
+        internal int EnregistrerModifsClients()
+        {
+            return SaveChanges();
+        }
 
+        internal void SupprimerUnClient(int id)
+        {
+            Client cl = Clients.Find(id);
 
-
-        //    //var 
-
-        //    //    .Include(a => a.Adresses)
-        //    //    .Include(b => b.Telephones).ToList();
-        //    ////.Include(c => c.Email)
-        //    ////.Select(d => d.Rue).ToList();
-        return Coordonnees;
+            if (cl != null)
+            {
+                Clients.Remove(cl);
+            }
         }
 
         public void AjouterClient(Client clien, Adresse adre)
         {
             Clients.Add(clien);
-            Addresses.Add(adre);
+            Adresses.Add(adre);
         }
 
         internal void AjouterNumeroMail(Client client, Telephone tel, Email eml)
         {
             Client clion = Clients.Find(client.Id);
-            Telephone telephone = Telephones.Find(tel.IdClient);
-            Email email = Emails.Find(eml.IdClient);
+            Telephone telephone = Telephones.Find(tel.Numero);
+            Email email = Emails.Find(eml.Adresse);
 
             if(clion != null)
             {
