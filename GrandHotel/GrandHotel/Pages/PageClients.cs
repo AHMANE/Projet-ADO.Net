@@ -14,7 +14,7 @@ namespace GrandHotel.Pages
         {
             Menu.AddOption("1", "Liste des clients", AfficherClients);
             Menu.AddOption("2", "Coordonnées clients", CoordonnesClients);
-            Menu.AddOption("2", "Créer un nouveau Client ", CreationClient);
+            Menu.AddOption("3", "Créer un nouveau Client ", CreationClient);
         }
 
         private void CreationClient()
@@ -39,21 +39,21 @@ namespace GrandHotel.Pages
 
 
             GrandHotelApp.Instance.DAL.AjouterClient(clien, adre);
-           
+
 
             Output.WriteLine(ConsoleColor.Green, "produit créer avec succés");
         }
 
         // Affichage des Clientss
-        private  void AfficherClients()
-            {
-                IList<Client> ListeClients=GrandHotelApp.Instance.DAL.ObtenirClients();
-                ConsoleTable.From(ListeClients).Display("Liste des clients");
-            }
+        private void AfficherClients()
+        {
+            IList<Client> ListeClients = GrandHotelApp.Instance.DAL.ObtenirClients();
+            ConsoleTable.From(ListeClients).Display("Liste des clients");
+        }
 
-            // Affichage des Coordonnees
-            private void CoordonnesClients()
-            {
+        // Affichage des Coordonnees
+        private void CoordonnesClients()
+        {
             int IdClient;
             IList<Client> Coordonnees;
             AfficherClients();
