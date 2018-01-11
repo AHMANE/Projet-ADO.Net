@@ -34,7 +34,7 @@ namespace GrandHotel
 
         }
 
-        public Client ObtenirCoordonnees(int idClient)
+        public IList<Client> ObtenirCoordonnees()
         {
             // List<Client> Coordonnees;
             var Coordonnees = Clients.Where(s => s.Id == idClient).FirstOrDefault();
@@ -56,8 +56,8 @@ namespace GrandHotel
         internal void AjouterNumeroMail(Client client, Telephone tel, Email eml)
         {
             Client clion = Clients.Find(client.Id);
-            Telephone telephone = Telephones.Find(tel.IdClient);
-            Email email = Emails.Find(eml.IdClient);
+            Telephone telephone = Telephones.Find(tel.Numero);
+            Email email = Emails.Find(eml.Adresse);
 
             if(clion != null)
             {

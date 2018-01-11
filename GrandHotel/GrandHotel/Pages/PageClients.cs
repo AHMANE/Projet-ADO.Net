@@ -120,21 +120,23 @@ namespace GrandHotel.Pages
             // Affichage des Coordonnees//
         private void CoordonnesClients()
             {
-           
-             
+            int IdClient;
+            IList<Client> Coordonnees;
             AfficherClients();
-            int IdClient = Input.Read<int>("Saisissez l'id du client dont vous souhaitez voir les coordonnees :");
-            var CoordonneesClients = GrandHotelApp.Instance.DAL.ObtenirCoordonnees().Where(s => s.Id == IdClient).FirstOrDefault();
-            var tel = CoordonneesClients.Telephones;
-            var email = CoordonneesClients.Emails;
-            var adresse = CoordonneesClients.Adresses;
-            
-            ConsoleTable.From(tel, "tel").Display("tel");
-            ConsoleTable.From(email, "email").Display("email:");
-            
+            IdClient = Input.Read<int>("Saisissez l'id du client dont vous souhaitez voir les coordonnees :");
+            Coordonnees = GrandHotelApp.Instance.DAL.ObtenirCoordonnees(IdClient);
+
+            var CoordonneesClients = Coordonnees.Where(s => s.Id == IdClient).FirstOrDefault();
+            var CP = CoordonneesClients.Adresses.Select(c=> c.CodePostal);
+            var Rue = CoordonneesClients.Adresses.Select(r => r.Rue);
+            var Complement = CoordonneesClients.Adresses.Select(com => com.Complement);
+            var Tels = CoordonneesClients.Telephones.Select(t => t.Numero);
+            var Emails = CoordonneesClients.Emails.Select(em => em.Adresse);
+
+            ConsoleTable.From(CP).Display("Code Postal:");
+
+            //var Clients = GrandHotelApp.Instance.DAL.ObtenirClients();
             //ConsoleTable.From(ListeClients).Display("Liste des clients");
         }
-      
-
     }
 }
