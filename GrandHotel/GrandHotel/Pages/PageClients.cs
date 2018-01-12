@@ -27,17 +27,18 @@ namespace GrandHotel.Pages
             _adresse = new Adresse();
 
         }
-
+        //**************************Exporter Clients en XML **************************//
         private void ExporterClients()
         {
-            List<Client> liste = GrandHotelApp.Instance.DAL.ChercherClientsxmL();
+            List<Client> liste = GrandHotelApp.Instance.DAL.ObtenirClientsXML();
 
             DAL.ExporterXml(liste);
 
             Output.WriteLine(ConsoleColor.Red, "Sérialisation réussie!");
         }
 
-        // Enregistrer les modifs
+        //**************************Enregistrer les modifs  **************************//
+      
         public void Enregistrer()
         {
             try
@@ -57,7 +58,8 @@ namespace GrandHotel.Pages
             };
         }
 
-        // Suprimer un client 
+        //**************************Suprimer un client  **************************//
+      
         private void SupprimerUnClient()
         {
             AfficherClients();
@@ -65,6 +67,7 @@ namespace GrandHotel.Pages
             GrandHotelApp.Instance.DAL.SupprimerUnClient(Id);
         }
 
+        //**************************Ajouter Une Addresse mail  et un Mail **************************//
         private void AjouterNuméroTelAdresseMailClient()
         {
            int choix = 0;
@@ -112,42 +115,15 @@ namespace GrandHotel.Pages
 
                 Telephone tel = new Telephone();
             Email email = new Email();
-         // // Affiche la liste des clients 
-         // int choix = Input.Read<int>("1 pour ajouter un Numero 2 pour Ajouter une adresse mail:");
-         // AfficherClients();
-         // if (choix == 1) { 
-            // Récupère le cleint dont l'id a été saisi
-           // int id = Input.Read<int>("Entrez l'Id du client dont vous souhaitez ajouter le numéro de tél :");
-           //     // Ajout de numero de tel
-           //     Output.WriteLine(ConsoleColor.Cyan, "Saisissez le numero de tél.:");
-           //     tel.IdClient = Input.Read<int>("Id : ");
-           //     tel.Numero = Input.Read<string>("Numéro : ");
-           //     tel.CodeType = Input.Read<string>("Tapez M pour le numéro mobile et F pour un numéro fixe : ");
-           //     tel.Pro = Input.Read<bool>("Numéro professionnel? Tapez @true (oui) ou @false(non)");
-           //     GrandHotelApp.Instance.DAL.AjouterNumero(tel);
-
+ 
             }
-         // if (choix == 2)
-         // {
-         //     int id = Input.Read<int>("Entrez l'Id du client dont vous souhaitez ajouter son adresse mail :");
-         //
-         //     // Ajout de l'adresse mail 
-         //     Output.WriteLine(ConsoleColor.Cyan, "Saisissez l'adresse mail:");
-         // email.Adresse = Input.Read<string>("Adresse mail : ");
-         // email.Pro = Input.Read<bool>("Adresse professionnelle? Tapez @true (oui) ou @false (non)");
-         //// email.IdClient = Client.Id;
-         //     GrandHotelApp.Instance.DAL.AjouterMail(email);
-         //     Output.WriteLine(ConsoleColor.Green, "Numéro et adresse mail ajoutés avec succès!");
-         // }
-
-
-            //Affiche Numero Client 
+  
             
-            
+           
             
         }
 
-        // Créer un client
+        //**************************AJouter un Client**************************//
         private void CreationClient()
         {
 
@@ -189,7 +165,7 @@ namespace GrandHotel.Pages
                 }
                 _adresse.IdClient = idx;
 
-                bool rue = false;
+              
                
                     _adresse.Rue = Input.Read<string>("Saississez la rue: ");
                     //rue = GrandHotelApp.Instance.DAL.VerificationTaille(_adresse.Rue, 40);
@@ -241,39 +217,30 @@ namespace GrandHotel.Pages
 
 
         }
-
-        // Affichage des Clients
-        private  void AfficherClients()
+        
+        //**************************Affichage des Clients**************************//
+        
+        private void AfficherClients()
             {
                 IList<Client> ListeClients=GrandHotelApp.Instance.DAL.ObtenirClients();
                 ConsoleTable.From(ListeClients).Display("Liste des clients");
             }
-
-            // Affichage des Coordonnees//
+        
+        //**************************Affichage des Coordonnees**************************//
+       
         private void CoordonnesClients()
             {
-            //int IdClient;
-            //Client Coordonnees;
-            //AfficherClients();
-            //IdClient = Input.Read<int>("Saisissez l'id du client dont vous souhaitez voir les coordonnees :");
-            //Coordonnees = GrandHotelApp.Instance.DAL.ObtenirCoordonnees(IdClient);
-
-            ////var CoordonneesClients = Coordonnees.Where(s => s.Id == IdClient).FirstOrDefault();
-            //var CP = Coordonnees.Adresses.Select(c=> c.CodePostal);
-            //var Rue = Coordonnees.Adresses.Select(r => r.Rue);
-            //var Complement = Coordonnees.Adresses.Select(com => com.Complement);
-            //var Tels = Coordonnees.Telephones.Select(t => t.Numero);
-            //var Emails = Coordonnees.Emails.Select(em => em.Adresse);
+    
 
             AfficherClients();
-            //Client Clientchoisi = new Client();
+            
 
             int id = Input.Read<int>("Id du client :");
 
 
 
             var coordonneesClient = GrandHotelApp.Instance.DAL.ObtenirCoordonnees().Where(p => p.Id == id).FirstOrDefault();
-            var adresse = coordonneesClient.Adresse;
+            var adresse = _adresse;
             var telephones = coordonneesClient.Telephones;
 
 

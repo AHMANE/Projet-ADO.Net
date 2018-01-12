@@ -12,7 +12,7 @@ namespace GrandHotel
    public class Entites 
     {
         [Serializable]
-        //[XmlInclude(typeof(List<Client>))]
+
         public class Client
         {
             [Key]
@@ -29,18 +29,18 @@ namespace GrandHotel
             [XmlAttribute]
             public string Societe { get; set; }
 
-           // Propriété de navigation
-           [Display(ShortName = "None")]
-           
-            public virtual Adresse Adresse { get; set; }
+            // Propriété de navigation
+            [Display(ShortName = "None")]
+
+            public virtual Adresse Adresses { get; set; }
             [Display(ShortName = "None")]
             [XmlIgnore]
-           
+
             public virtual List<Telephone> Telephones { get; set; }
             [Display(ShortName = "None")]
             [XmlIgnore]
-           public virtual List<Email> Emails { get; set; }
-            
+            public virtual List<Email> Emails { get; set; }
+
 
         }
        
@@ -101,5 +101,50 @@ namespace GrandHotel
             }
         }
 
+       /*
+        public class Facture
+        {
+            [Key]
+            [XmlAttribute]
+            public int Id { get; set; }
+            [ForeignKey("Client")]
+            [XmlAttribute]
+            public int IdClient { get; set; }
+            [XmlAttribute]
+            public DateTime DateFacture { get; set; }
+            [XmlIgnore]
+            public DateTime DatePaiement { get; set; }
+            [ForeignKey("ModePaiement")]
+            [XmlIgnore]
+            public string CodeModePaiement { get; set; }
+            // // Propriété de navigation
+            [XmlAttribute]
+            public virtual Client Client { get; set; }
+            [XmlIgnore]
+            public virtual LigneFacture LigneFacture { get; set; }
+
+        }
+
+        public class LigneFacture
+        {
+            [Key]
+            [ForeignKey("Facture")]
+            public int IdFacture { get; set; }
+            [Key]
+            public int NumLigne { get; set; }
+            public short Quantite { get; set; }
+            public decimal MontantHT { get; set; }
+            public decimal TauxTVA { get; set; }
+            public decimal TauxReduction { get; set; }
+        }
+
+        public class ModePaiement
+        {
+            [Key]
+            public string Code { get; set; }
+            public string Libelle { get; set; }
+        }
+        */
+   
     }
 }
