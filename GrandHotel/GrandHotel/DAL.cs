@@ -73,38 +73,38 @@ namespace GrandHotel
             Addresses.Add(adre);
         }
 
-        internal void AjouterNumeroMail(Client client, Telephone tel, Email eml)
+        public void AjouterNumeroMail(Client client, Telephone tel, Email email)
         {
-            Client clion = Clients.Find(client.Id);
-            Telephone telephone = Telephones.Find(tel.Numero);
-            Email email = Emails.Find(eml.Adresse);
+            //Client clion = Clients.Find(client.Id);
+            //Telephone telephone = Telephones.Find(tel.Numero);
+            //Email email = Emails.Find(eml.Adresse);
 
-            if(clion != null)
-            {
-                if(telephone == null)
-                {
-                    telephone.IdClient = tel.IdClient;
+            Telephone telephone = new Telephone();
+            Email eml = new Email();
+
+            //if(clion != null)
+            //{
+            //    if(telephone == null)
+            //    {
+            telephone.IdClient = tel.IdClient;
                     telephone.Numero = tel.Numero;
                     telephone.CodeType = tel.CodeType;
                     telephone.Pro = tel.Pro;
                     
-                }
-                if (email == null)
-                {
-                    email.Adresse = eml.Adresse;
-                    email.Pro = eml.Pro;
-                }
+                //}
+                //if (email == null)
+                //{
+                    eml.Adresse = email.Adresse;
+                    eml.Pro = email.Pro;
+                //}
                 Telephones.Add(telephone);
-                Emails.Add(email);
+                Emails.Add(eml);
             }
-        }
 
         // Création d'un fichier XML contenant la liste des clients.
-
-       
-            public  void ExporterXml()
-            {
-           var liste = ObtenirClients();
+        public void ExporterXml()
+        {
+            var liste = ObtenirClients();
 
             // On crée un sérialiseur, en spécifiant le type de l'objet à sérialiser
             // et le nom de l'élément xml racine
@@ -113,10 +113,9 @@ namespace GrandHotel
             serialiseur2.Serialize(flux, liste);
             flux.Close();
         }
-
-        
     }
-        
  }
+        
+
     
 

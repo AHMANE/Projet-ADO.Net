@@ -31,7 +31,7 @@ namespace GrandHotel.Pages
         }
 
         // Enregistrer les modifs
-        private void Enregistrer()
+        public void Enregistrer()
         {
             try
             {
@@ -64,7 +64,7 @@ namespace GrandHotel.Pages
           AfficherClients();
 
             // Récupère le cleint dont l'id a été saisi
-            int id = Input.Read<int>("Id du Client à Ajouter son numéro de tel ou/et son adresse mail :");
+            int id = Input.Read<int>("Entrez l'Id du client dont vous souhaitez ajouter le numéro de tél. et/ou son adresse mail:");
 
 
             //Client client = _client.Where(x => x.Id == id).FirstOrDefault();
@@ -73,22 +73,25 @@ namespace GrandHotel.Pages
             Email email = new Email();
 
             // Ajout de numero de tel
-            Output.WriteLine(ConsoleColor.Cyan, "Saisir le numero de tel");
+            Output.WriteLine(ConsoleColor.Cyan, "Saisissez le numero de tél.:");
             tel.IdClient = Input.Read<int>("Id : ");
             tel.Numero = Input.Read<string>("Numéro : ");
-            tel.CodeType = Input.Read<string>("Tapez M pour le numero mobile et F pour un numéro Fixe : ");
-            tel.Pro = Input.Read<bool>("Professionnel Tapez true ou false");
+            tel.CodeType = Input.Read<string>("Tapez M pour le numéro mobile et F pour un numéro fixe : ");
+            tel.Pro = Input.Read<bool>("Numéro professionnel? Tapez @true (oui) ou @false(non)");
+           
             // Ajout de l'adresse mail 
-            Output.WriteLine(ConsoleColor.Cyan, "Saisir adresse mail");
+            Output.WriteLine(ConsoleColor.Cyan, "Saisissez l'adresse mail:");
             email.Adresse = Input.Read<string>("Adresse mail : ");
-            email.Pro = Input.Read<bool>("Professionnel Tapez true ou false");
+            email.Pro = Input.Read<bool>("Adresse professionnelle? Tapez @true (oui) ou @false (non)");
+            email.IdClient = client.Id;
             Enregistrer();
-       ;
+
+            
 
             //Affiche Numero Client 
             GrandHotelApp.Instance.DAL.AjouterNumeroMail(client, tel, email);
             
-            Output.WriteLine(ConsoleColor.Green, "Numero et mail ajouter  avec succés");
+            Output.WriteLine(ConsoleColor.Green, "Numéro et adresse mail ajoutés avec succès!");
         }
 
         // Créer un client

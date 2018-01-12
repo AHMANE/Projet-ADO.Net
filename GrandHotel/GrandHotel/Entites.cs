@@ -91,7 +91,6 @@ namespace GrandHotel
             [XmlAttribute]
             public string Adresse { get; set; }
             [ForeignKey("Client")]
-            [XmlIgnore]
             public int IdClient { get; set; }
             [XmlIgnore]
             public bool Pro { get; set; }
