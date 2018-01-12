@@ -26,11 +26,11 @@ namespace GrandHotel.Pages
 
         private void ExporterClients()
         {
+            List<Client> liste = GrandHotelApp.Instance.DAL.ChercherClientsxmL();
 
+            DAL.ExporterXml(liste);
 
-            GrandHotelApp.Instance.DAL.ExporterXml();
-
-            Output.WriteLine(ConsoleColor.Red, "Serialisation reussie");
+            Output.WriteLine(ConsoleColor.Red, "Sérialisation réussie!");
         }
 
         // Enregistrer les modifs

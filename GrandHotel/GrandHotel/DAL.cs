@@ -5,43 +5,51 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static GrandHotel.Entites;
 using System.Xml.Serialization;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Soap;
+
 
 namespace GrandHotel
 {
     public class DAL : DbContext
     {
-        private const string FICHIER_XML = @"S:\Hafid\Cours\Projet_ADO.Net\GrandHotel\listeClient.xml";
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Adresse> Addresses { get; set; }
-        public DbSet<Telephone> Telephones { get; set; }
-        public DbSet<Email> Emails { get; set; }
+        //private const string FICHIER_XML = @"S:\Velio\listeClient.xml";
+        public DbSet<Entites.Client> Clients { get; set; }
+        public DbSet<Entites.Adresse> Addresses { get; set; }
+        public DbSet<Entites.Telephone> Telephones { get; set; }
+        public DbSet<Entites.Email> Emails { get; set; }
 
         public DAL() : base("GrandHotel.Properties.Settings.HotelConnection")
         {
-
+            // Permet d'identifier directement les entités définies dans la classe "Entités" sans créer de proxy.
+            Configuration.ProxyCreationEnabled = false;///
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
         
-        public  IList<Client> ObtenirClients()
+        public  List<Entites.Client> ObtenirClients()
         {
             Clients.OrderBy(c => c.Id).Load();
             return Clients.Local.OrderBy(c => c.Id).ToList();
 
         }
+        public List<Entites.Client> ChercherClientsxmL()
+        {
+            var ClTr = Clients.AsNoTracking().ToList();
+            return ClTr;
+                
+            // Clients.AsNoTracking().OrderBy(c => c.Id).ToList();
 
+        }
         public void EnregistrerModifsClients()
         {
             SaveChanges();
         }
 
-        public IList<Client> ObtenirCoordonnees()
+        public IList<Entites.Client> ObtenirCoordonnees()
         {
             // List<Client> Coordonnees;
             //var Coordonnees = Clients.Where(s => s.Id == IdClient).FirstOrDefault();
@@ -54,33 +62,33 @@ namespace GrandHotel
             //IList<Client> Coordonnees;
             //return Coordonnees;
 
-            return Clients.Include(a => a.Adresse).Include(b => b.Telephones).Include(c => c.Emails).ToList();
+            return Clients.AsNoTracking().Include(a => a.Adresse).Include(b => b.Telephones).Include(c => c.Emails).ToList();
             
         }
 
         public void SupprimerUnClient(int id)
         {
-            Client CL = Clients.Find(id);
+            Entites.Client CL = Clients.Find(id);
             if (CL != null)
             {
                 Clients.Remove(CL);
             }
         }
 
-        public void AjouterClient(Client clien, Adresse adre)
+        public void AjouterClient(Entites.Client clien, Entites.Adresse adre)
         {
             Clients.Add(clien);
             Addresses.Add(adre);
         }
 
-        public void AjouterNumeroMail(Client client, Telephone tel, Email email)
+        public void AjouterNumeroMail(Entites.Client client, Entites.Telephone tel, Entites.Email email)
         {
             //Client clion = Clients.Find(client.Id);
             //Telephone telephone = Telephones.Find(tel.Numero);
             //Email email = Emails.Find(eml.Adresse);
 
-            Telephone telephone = new Telephone();
-            Email eml = new Email();
+            Entites.Telephone telephone = new Entites.Telephone();
+            Entites.Email eml = new Entites.Email();
 
             //if(clion != null)
             //{
@@ -105,33 +113,34 @@ namespace GrandHotel
 
 
         //private Client client1= null;
-        public void ExporterXml()
+        public static void ExporterXml(List<Entites.Client> ClTr)
         {
-
-            List<Client> liste = new List<Client>();
-           Client client1 = new Client();
+            //List<Client> liste = ObtenirClients();
+           //Client client1 = new Client();
             
-            
-            for (int i = 0; i < Clients.Count(); i++)
-            {
-                foreach (var c in Clients)
-                {
+            //for (int i = 0; i <= Clients.Count(); i++)
+            //{
+                //foreach (var c in Clients)
+                //{
+                    //liste.Add(client1.Id);
+                    //client1.Civilite = c.Civilite;
+                    //client1.Nom = c.Nom;
+                    //client1.Prenom = c.Prenom;
+                    //client1.CarteFidelite = c.CarteFidelite;
+                    //client1.Societe = c.Societe;
 
-                    client1.Id = c.Id;
-                    client1.Civilite = c.Civilite;
-                    client1.Nom = c.Nom;
-                    client1.Prenom = c.Prenom;
-                    client1.CarteFidelite = c.CarteFidelite;
-                    client1.Societe = c.Societe;
-                }
+                    //client1.Id = c.Id;
+                    //client1.Civilite = c.Civilite;
+                    //client1.Nom = c.Nom;
+                    //client1.Prenom = c.Prenom;
+                    //client1.CarteFidelite = c.CarteFidelite;
+                    //client1.Societe = c.Societe;
+                //}
 
-               liste.Add(client1);
+            //    client1 =liste.Add(new Client);
 
-            }
+            //}
            
-        
-
-            
 
             // On crée un sérialiseur, en spécifiant le type de l'objet à sérialiser
             // et le nom de l'élément xml racine
@@ -142,13 +151,22 @@ namespace GrandHotel
 
             // On crée un sérialiseur, en spécifiant le type de l'objet à sérialiser
             // et le nom de l'élément xml racine
-            FileStream flux = File.Create(FICHIER_XML);
-            SoapFormatter serialiseur2 = new SoapFormatter();
-            serialiseur2.Serialize(flux, liste);
-            flux.Close();
+            //FileStream flux = File.Create(FICHIER_XML);
+            //SoapFormatter serialiseur2 = new SoapFormatter();
+            //serialiseur2.Serialize(flux, liste);
+            //flux.Close();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Entites.Client>),
+                              new XmlRootAttribute("ListeClients"));
+
+            using (var sw = new StreamWriter(@"S:\Velio\ListeClients.xml"))
+            {
+                serializer.Serialize(sw, ClTr);
+            }
+
         }
 
-        
+
     }
         
  }

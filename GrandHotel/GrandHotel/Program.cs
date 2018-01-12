@@ -19,12 +19,12 @@ namespace GrandHotel
             MenuPage accueil = new PageAccueil();
             app.AddPage(accueil);
             app.AddPage(new PageClients());
-
+            app.AddPage(new PageFactures());
 
 
 
             // Affichage de la page d'accueil .
-        
+
             app.NavigateTo(accueil);
 
             // lancement de l'application

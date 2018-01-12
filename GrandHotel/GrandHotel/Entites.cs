@@ -11,7 +11,8 @@ namespace GrandHotel
 {
    public class Entites 
     {
-        [XmlInclude(typeof(Client))]
+        [Serializable]
+        //[XmlInclude(typeof(List<Client>))]
         public class Client
         {
             [Key]
@@ -28,8 +29,9 @@ namespace GrandHotel
             [XmlAttribute]
             public string Societe { get; set; }
 
-            // Propriété de navigation
-            [Display(ShortName = "None")]
+           // Propriété de navigation
+           [Display(ShortName = "None")]
+           
             public virtual Adresse Adresse { get; set; }
             [Display(ShortName = "None")]
             [XmlIgnore]

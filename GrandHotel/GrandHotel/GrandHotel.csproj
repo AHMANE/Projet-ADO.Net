@@ -53,6 +53,7 @@
     <Compile Include="DAL.cs" />
     <Compile Include="Entites.cs" />
     <Compile Include="GrandHotelApp.cs" />
+    <Compile Include="Pages\PageFactures.cs" />
     <Compile Include="Pages\PageAccueil.cs" />
     <Compile Include="Pages\PageClients.cs" />
     <Compile Include="Program.cs" />
