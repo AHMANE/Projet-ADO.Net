@@ -35,14 +35,11 @@ namespace GrandHotel
             public virtual Adresse Adresse { get; set; }
             [Display(ShortName = "None")]
             [XmlIgnore]
-            [XmlArray("Telephones")]
-            [XmlArrayItem("Telephone")]
+           
             public virtual List<Telephone> Telephones { get; set; }
             [Display(ShortName = "None")]
             [XmlIgnore]
-            [XmlArray("Emails")]
-            [XmlArrayItem("Email")]
-            public virtual List<Email> Emails { get; set; }
+           public virtual List<Email> Emails { get; set; }
             
 
         }
