@@ -82,7 +82,7 @@ namespace GrandHotel.Pages
             Output.WriteLine(ConsoleColor.Cyan, "Saisir adresse mail");
             email.Adresse = Input.Read<string>("Adresse mail : ");
             email.Pro = Input.Read<bool>("Professionnel Tapez true ou false");
-
+            Enregistrer();
        ;
 
             //Affiche Numero Client 
@@ -100,7 +100,7 @@ namespace GrandHotel.Pages
             Output.WriteLine(ConsoleColor.Green, "Saisissez les informations du client :");
 
 
-            clien.Id = Input.Read<int>("Veuiller Saisir un ID Cleint : ");
+            //clien.Id = Input.Read<int>("Veuiller Saisir un ID Cleint : ");
             clien.Civilite = Input.Read<string>("Civilité : ");
             clien.Nom = Input.Read<string>("Nom : ");
             clien.Prenom = Input.Read<string>("Prenom :");
@@ -151,7 +151,7 @@ namespace GrandHotel.Pages
 
 
             var coordonneesClient = GrandHotelApp.Instance.DAL.ObtenirCoordonnees().Where(p => p.Id == id).FirstOrDefault();
-            var adresse = coordonneesClient.Adresses;
+            var adresse = coordonneesClient.Adresse;
             var telephones = coordonneesClient.Telephones;
 
 
