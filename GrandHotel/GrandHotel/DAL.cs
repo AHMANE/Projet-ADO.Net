@@ -181,8 +181,16 @@ namespace GrandHotel
             flux.Close();
         }
 
-
+        internal void AjoutAdresse(Adresse adresse)
+        {
+            Addresse.Add(adresse);
         }
+
+        internal void AjoutClient(Client client)
+        {
+            Client.Add(client);
+        }
+    }
 
     }
         
