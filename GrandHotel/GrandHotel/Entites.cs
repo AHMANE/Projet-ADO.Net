@@ -11,7 +11,7 @@ namespace GrandHotel
 {
    public class Entites 
     {
-       
+        [XmlInclude(typeof(Client))]
         public class Client
         {
             [Key]

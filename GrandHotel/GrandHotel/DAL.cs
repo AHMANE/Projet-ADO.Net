@@ -14,7 +14,7 @@ namespace GrandHotel
 {
     public class DAL : DbContext
     {
-        private const string FICHIER_XML = @"..\..\listeSalle.xml";
+        private const string FICHIER_XML = @"S:\Hafid\Cours\Projet_ADO.Net\GrandHotel\listeClient.xml";
         public DbSet<Client> Clients { get; set; }
         public DbSet<Adresse> Addresses { get; set; }
         public DbSet<Telephone> Telephones { get; set; }
@@ -28,7 +28,7 @@ namespace GrandHotel
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
-
+        
         public  IList<Client> ObtenirClients()
         {
             Clients.OrderBy(c => c.Id).Load();
@@ -73,49 +73,87 @@ namespace GrandHotel
             Addresses.Add(adre);
         }
 
-        public void AjouterNumeroMail(Client client, Telephone tel, Email email)
+        internal void AjouterNumeroMail(Client client, Telephone tel, Email eml)
         {
-            //Client clion = Clients.Find(client.Id);
-            //Telephone telephone = Telephones.Find(tel.Numero);
-            //Email email = Emails.Find(eml.Adresse);
+            Client clion = Clients.Find(client.Id);
+            Telephone telephone = Telephones.Find(tel.Numero);
+            Email email = Emails.Find(eml.Adresse);
 
-            Telephone telephone = new Telephone();
-            Email eml = new Email();
-
-            //if(clion != null)
-            //{
-            //    if(telephone == null)
-            //    {
-            telephone.IdClient = tel.IdClient;
+            if(clion != null)
+            {
+                if(telephone == null)
+                {
+                    telephone.IdClient = tel.IdClient;
                     telephone.Numero = tel.Numero;
                     telephone.CodeType = tel.CodeType;
                     telephone.Pro = tel.Pro;
                     
-                //}
-                //if (email == null)
-                //{
-                    eml.Adresse = email.Adresse;
-                    eml.Pro = email.Pro;
-                //}
+                }
+                if (email == null)
+                {
+                    email.Adresse = eml.Adresse;
+                    email.Pro = eml.Pro;
+                }
                 Telephones.Add(telephone);
-                Emails.Add(eml);
+                Emails.Add(email);
             }
+        }
 
         // Création d'un fichier XML contenant la liste des clients.
+
+
+        //private Client client1= null;
         public void ExporterXml()
         {
-            var liste = ObtenirClients();
+
+            List<Client> liste = new List<Client>();
+           Client client1 = new Client();
+            
+            
+            for (int i = 0; i < Clients.Count(); i++)
+            {
+                foreach (var c in Clients)
+                {
+
+                    client1.Id = c.Id;
+                    client1.Civilite = c.Civilite;
+                    client1.Nom = c.Nom;
+                    client1.Prenom = c.Prenom;
+                    client1.CarteFidelite = c.CarteFidelite;
+                    client1.Societe = c.Societe;
+                }
+
+               liste.Add(client1);
+
+            }
+           
+        
+
+            
 
             // On crée un sérialiseur, en spécifiant le type de l'objet à sérialiser
             // et le nom de l'élément xml racine
-            FileStream flux = File.Create(FICHIER_XML);
-            SoapFormatter serialiseur2 = new SoapFormatter();
-            serialiseur2.Serialize(flux, liste);
-            flux.Close();
-        }
-    }
- }
-        
+            //FileStream flux = File.Create(FICHIER_XML);
+            //SoapFormatter serialiseur2 = new SoapFormatter();
+            //serialiseur2.Serialize(flux, liste);
+            //flux.Close();
 
+            // On crée un sérialiseur, en spécifiant le type de l'objet à sérialiser
+            // et le nom de l'élément xml racine
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Client>),
+                                       new XmlRootAttribute("Clients"));
+           
+            using (var sw = new StreamWriter(FICHIER_XML))
+            {
+                serializer.Serialize(sw, liste);
+           
+            }
+
+
+        }
+
+    }
+        
+ }
     
 

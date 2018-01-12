@@ -26,8 +26,11 @@ namespace GrandHotel.Pages
 
         private void ExporterClients()
         {
-            
+
+
             GrandHotelApp.Instance.DAL.ExporterXml();
+
+            Output.WriteLine(ConsoleColor.Red, "Serialisation reussie");
         }
 
         // Enregistrer les modifs
