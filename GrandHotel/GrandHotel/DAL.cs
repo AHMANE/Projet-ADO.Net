@@ -54,7 +54,7 @@ namespace GrandHotel
             //IList<Client> Coordonnees;
             //return Coordonnees;
 
-            return Clients.Include(a => a.Adresses).Include(b => b.Telephones).Include(c => c.Emails).ToList();
+            return Clients.Include(a => a.Adresse).Include(b => b.Telephones).Include(c => c.Emails).ToList();
             
         }
 
@@ -94,7 +94,8 @@ namespace GrandHotel
                     email.Adresse = eml.Adresse;
                     email.Pro = eml.Pro;
                 }
-                
+                Telephones.Add(telephone);
+                Emails.Add(email);
             }
         }
 

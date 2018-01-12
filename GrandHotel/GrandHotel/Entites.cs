@@ -30,7 +30,7 @@ namespace GrandHotel
 
             // Propriété de navigation
             [Display(ShortName = "None")]
-            public virtual Adresse Adresses { get; set; }
+            public virtual Adresse Adresse { get; set; }
             [Display(ShortName = "None")]
             [XmlIgnore]
             [XmlArray("Telephones")]
