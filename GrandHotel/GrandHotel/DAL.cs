@@ -75,9 +75,9 @@ namespace GrandHotel
 
         internal void AjouterNumeroMail(Client client, Telephone tel, Email eml)
         {
-            Client clion = Client.Find(client.Id);
-            Telephone telephone = Telephone.Find(tel.Numero);
-            Email email = Email.Find(eml.Adresse);
+            Client clion = Clients.Find(client.Id);
+            Telephone telephone = Telephones.Find(tel.Numero);
+            Email email = Emails.Find(eml.Adresse);
 
             if(clion != null)
             {
@@ -145,9 +145,9 @@ namespace GrandHotel
            Client client1 = new Client();
             
             
-            for (int i = 0; i < Client.Count(); i++)
+            for (int i = 0; i < Clients.Count(); i++)
             {
-                foreach (var c in Client)
+                foreach (var c in Clients)
                 {
 
                     client1.Id = c.Id;
@@ -175,32 +175,15 @@ namespace GrandHotel
 
             // On crée un sérialiseur, en spécifiant le type de l'objet à sérialiser
             // et le nom de l'élément xml racine
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Client>),
-                                       new XmlRootAttribute("Clients"));
-           
-            using (var sw = new StreamWriter(FICHIER_XML))
-            {
-                serializer.Serialize(sw, liste);
-           
-            }
+            FileStream flux = File.Create(FICHIER_XML);
+            SoapFormatter serialiseur2 = new SoapFormatter();
+            serialiseur2.Serialize(flux, liste);
+            flux.Close();
+        }
 
 
         }
 
-        internal void AjouterMail(Email email)
-        {
-            Email.Add(email);
-        }
-
-        internal void AjoutClient(Client client)
-        {
-            Client.Add(client);
-        }
-
-        internal void AjoutAdresse(Adresse adresse)
-        {
-            Addresse.Add(adresse);
-        }
     }
         
  }
